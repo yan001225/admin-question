@@ -1,47 +1,53 @@
 <template>
 	<div class="about">
-		<el-divider border-style="dashed">
-			<div class="divider">
-				<div class="divider-num">1</div>
-				<div class="divider-title">协议主题</div>
-			</div>
-		</el-divider>
+		<divider num="1" title="协议主体"></divider>
+		<el-form
+			:rules="rules"
+			:inline="true"
+			:model="formInline"
+			class="demo-form-inline"
+		>
+			<el-form-item label="协议客户" prop="user">
+				<el-input v-model="formInline.user" placeholder="Approved by" />
+			</el-form-item>
+			<el-form-item label="Activity zone">
+				<el-select v-model="formInline.region" placeholder="Activity zone">
+					<el-option label="Zone one" value="shanghai" />
+					<el-option label="Zone two" value="beijing" />
+				</el-select>
+			</el-form-item>
+		</el-form>
 	</div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import { reactive } from 'vue';
+import Divider from '../components/Divider.vue';
 
-const route = useRoute();
-// console.log(route);
+const formInline = reactive({
+	user: '',
+	region: '',
+});
+
+const rules = reactive({
+	user: [
+		{ required: true, message: 'Please input Activity name', trigger: 'blur' },
+	],
+});
 </script>
 
-<style lang="scss">
-.el-divider__text {
-	background-color: #f5f5f5;
-}
-.el-divider--horizontal {
-	border-top: 3px var(--el-border-color) var(--el-border-style) !important;
-}
-.divider {
+<style lang="scss" scoped>
+.demo-form-inline {
 	display: flex;
 	align-items: center;
-	&-num {
-		width: 18px;
-		height: 18px;
-		border-radius: 50%;
-		background-color: #4e8dff;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #fff;
-		font-size: 16px;
-		font-weight: 600;
-	}
-	&-title {
-		font-size: 20px;
-		font-weight: 600;
-		margin-left: 10px;
-	}
+	background-color: #fff;
+	padding: 30px;
+	// justify-content: space-between;
+}
+.el-form-item {
+	width: 50%;
+}
+.el-input {
+	width: 350px;
 }
 </style>
