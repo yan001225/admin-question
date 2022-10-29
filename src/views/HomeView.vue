@@ -109,7 +109,7 @@ watchEffect(() => {
 
 <style lang="scss" scoped>
 .aside {
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #2a3139;
 	.logo {
 		height: 100px;
